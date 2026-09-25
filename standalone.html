@@ -86,7 +86,7 @@ svg{display:block}
 .leaf:focus-visible .p-outline{stroke:var(--navy);stroke-opacity:1;stroke-width:2.5}
 
 .leaf-anchor{position:absolute;left:56%;top:44%;width:0;height:0}
-.leaf-rot{position:absolute;left:0;top:0;width:21cqw;pointer-events:auto;text-align:left;
+.leaf-rot{position:absolute;left:0;top:0;width:max(24cqw,124px);pointer-events:auto;text-align:left;
   transform:translate(-50%,-50%) rotate(0deg);transition:transform var(--rot-dur) var(--rot-ease),opacity .45s;opacity:.72}
 .leaf[aria-selected="true"] .leaf-rot{opacity:1}
 .stage.no-anim .propeller,.stage.no-anim .leaf-rot{transition:none !important}
@@ -95,12 +95,12 @@ svg{display:block}
 .stage.intro .leaf{transition-duration:var(--intro-dur)}
 .stage.intro svg.petal{animation:spinblur var(--intro-dur) ease-out}
 @keyframes spinblur{0%{filter:blur(1.2px) saturate(.8)}45%{filter:blur(.6px)}100%{filter:none}}
-.leaf-icon{display:block;width:24px;height:24px;flex:none;overflow:hidden;color:var(--deep);margin-bottom:.8cqw;transition:transform .5s var(--rot-ease)}
+.leaf-icon{display:block;width:26px;height:26px;flex:none;overflow:hidden;color:var(--deep);margin-bottom:.8cqw;transition:transform .5s var(--rot-ease)}
 .leaf[aria-selected="true"] .leaf-icon svg{stroke-width:2}
-.leaf-icon svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
-.leaf-name{display:block;font-family:var(--display);font-weight:600;color:var(--navy);font-size:clamp(11px,2.55cqw,17px);line-height:1.2;letter-spacing:-.01em}
+.leaf-icon svg{width:26px;height:26px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.leaf-name{display:block;font-family:var(--display);font-weight:600;color:var(--navy);font-size:clamp(14px,3cqw,19px);line-height:1.22;letter-spacing:-.012em}
 .leaf-name .short{display:none}
-.leaf-desc{display:block;font-size:clamp(10px,1.75cqw,13px);line-height:1.35;color:var(--ink);margin-top:.6cqw}
+.leaf-desc{display:block;font-size:clamp(12.5px,2.15cqw,15px);line-height:1.4;color:var(--ink);margin-top:.7cqw}
 .leaf-go{display:grid;place-items:center;width:clamp(22px,4.4cqw,32px);height:clamp(22px,4.4cqw,32px);border-radius:50%;background:#fff;color:var(--deep);margin-top:1.2cqw;box-shadow:0 2px 8px rgba(11,27,63,.1);transition:transform .3s}
 .leaf-go svg{width:55%;height:55%;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 .leaf:hover .leaf-go{transform:translateX(3px)}
@@ -115,11 +115,13 @@ svg{display:block}
 .core-bar span{height:3px;border-radius:2px;flex:1;opacity:.35;transition:flex .6s var(--rot-ease),opacity .4s}
 .core-bar span.on{flex:2.6;opacity:1}
 
-@container (max-width:440px){
+@container (max-width:430px){
   .leaf-desc{display:none}
   .leaf-name .full{display:none}
   .leaf-name .short{display:inline}
-  .leaf-rot{width:24cqw}
+  .leaf-rot{width:max(27cqw,96px)}
+  .leaf{width:44%;height:44%;top:6%}      /* bigger blades so the larger type still fits */
+  .leaf-anchor{left:54%;top:46%}
 }
 
 /* ---------- Panel ---------- */
@@ -232,6 +234,42 @@ html.lb-open{overflow:hidden}
   .stage.rm-flash .propeller{animation:rmflash .22s ease}
   @keyframes rmflash{from{opacity:.5}to{opacity:1}}
 }
+/* ---------- deltas table ---------- */
+.deltas{margin-top:clamp(56px,7vw,96px)}
+.deltas-eyebrow{margin:0 0 10px;font-family:var(--display);font-size:11px;font-weight:600;letter-spacing:.3em;color:var(--accent-deep);transition:color .4s}
+.deltas-title{font-family:var(--display);font-weight:700;color:var(--navy);font-size:clamp(28px,3.6vw,46px);line-height:1.1;letter-spacing:-.025em;margin:0 0 14px}
+.deltas-title em{font-style:italic;font-weight:600;color:var(--accent);transition:color .4s}
+.deltas-lede{margin:0 0 30px;max-width:60ch;font-size:clamp(15px,1.25vw,17.5px);color:var(--ink)}
+.delta-table{width:100%;border-collapse:collapse;font-size:15.5px}
+.delta-table caption{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+.delta-table th,.delta-table td{text-align:left;padding:15px 20px;vertical-align:top;border-bottom:1px solid var(--line)}
+.delta-table thead th{font-family:var(--display);font-size:11.5px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--navy);
+  border-top:2px solid var(--navy);border-bottom:1px solid var(--line);white-space:nowrap;background:#FAFBFD}
+.delta-table tbody th{font-weight:500;color:var(--navy);width:34%}
+.delta-table tbody tr{transition:background .2s}
+.delta-table tbody tr:hover{background:color-mix(in srgb,var(--accent) 5%,#fff)}
+.delta-table td:nth-child(2){width:13%;white-space:nowrap}
+.delta-table td:nth-child(3){width:15%;white-space:nowrap}
+.delta-table s{color:var(--muted);text-decoration-thickness:1.5px}
+.delta-ours{font-family:var(--display);font-weight:700;font-size:17px;color:#0C7D50}
+.delta-mech b{font-family:var(--display);font-weight:600;font-size:15px}
+.delta-detail{color:var(--ink)}
+.delta-note{display:grid;grid-template-columns:auto 1fr;gap:26px;margin-top:26px;padding:22px 26px;border-radius:0 18px 18px 0;
+  border-left:3px solid var(--accent);background:linear-gradient(100deg,color-mix(in srgb,var(--accent) 7%,#fff),#fff 70%);transition:border-color .4s}
+.delta-note dt{font-family:var(--display);font-size:11px;font-weight:600;letter-spacing:.28em;color:var(--accent-deep);white-space:nowrap;padding-top:3px;transition:color .4s}
+.delta-note dd{margin:0;color:var(--ink);font-size:15.5px}
+.delta-note b{color:var(--navy);font-weight:600}
+@media (max-width:820px){
+  .delta-table,.delta-table tbody,.delta-table tr,.delta-table th,.delta-table td{display:block;width:auto}
+  .delta-table thead{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+  .delta-table tbody tr{border:1px solid var(--line);border-radius:16px 22px 16px 22px;padding:16px 18px;margin-bottom:12px}
+  .delta-table th,.delta-table td{border:0;padding:5px 0}
+  .delta-table tbody th{width:auto;font-family:var(--display);font-weight:600;font-size:17px;margin-bottom:4px}
+  .delta-table td:nth-child(2),.delta-table td:nth-child(3){width:auto}
+  .delta-table td[data-label]::before{content:attr(data-label);display:block;font-size:10.5px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:2px}
+  .delta-note{grid-template-columns:1fr;gap:10px;border-radius:0 14px 14px 0}
+}
+
 /* ==========================================================
    SITE CHROME: header, sub-nav, hero, AI search
    ========================================================== */
@@ -365,7 +403,7 @@ a{color:inherit}
 .bot-orb:hover .bot-tip,.bot-orb:focus-within .bot-tip{opacity:1;transform:none}
 .bot-btn{display:block;width:60px;height:60px;border-radius:50%;padding:0;line-height:0;-webkit-tap-highlight-color:transparent}
 .bot-btn canvas{width:60px;height:60px;display:block;border-radius:50%;
-  filter:drop-shadow(0 4px 9px rgba(58,78,130,.22));
+  filter:drop-shadow(0 4px 9px rgba(96,40,170,.26));
   animation:botFloat 5.5s ease-in-out infinite;transition:transform .3s}
 .bot-btn:hover canvas{transform:scale(1.06)}
 .bot-btn:focus-visible{outline:2px solid #7C4DFF;outline-offset:4px;border-radius:50%}
@@ -472,11 +510,33 @@ a{color:inherit}
     </div>
 
     <div class="panel-col">
-      <p class="panel-tag">FOUR DOMAINS.<br>MANY POSSIBILITIES.</p>
+      <p class="panel-tag">FIVE DOMAINS.<br>MANY POSSIBILITIES.</p>
       <div class="panel" id="panel" role="tabpanel" tabindex="-1">
         <div class="panel-body" id="panelBody"></div>
       </div>
     </div>
+  </section>
+
+  <section class="deltas" aria-labelledby="deltasTitle">
+    <p class="deltas-eyebrow">THE DIFFERENTIATOR</p>
+    <h2 class="deltas-title" id="deltasTitle">Not adjectives. <em>Deltas.</em></h2>
+    <p class="deltas-lede">Every competitor says faster, smarter, AI-first. Here is what that means in units you can measure.</p>
+    <table class="delta-table">
+      <caption>Typical delivery times compared with Compunnel accelerators</caption>
+      <thead>
+        <tr>
+          <th scope="col">What you are actually buying</th>
+          <th scope="col">Typical</th>
+          <th scope="col">With Compunnel</th>
+          <th scope="col">The mechanism — our IP, not more people</th>
+        </tr>
+      </thead>
+      <tbody id="deltaRows"></tbody>
+    </table>
+    <dl class="delta-note">
+      <dt>HOW TO READ THIS</dt>
+      <dd>Every figure comes from a delivered engagement or a published accelerator benchmark. We will <b>write the range into the statement of work</b> — and show you the artifact that produces it in week one, before you commit to the programme.</dd>
+    </dl>
   </section>
 
   <ul class="values" id="values"></ul>
@@ -565,6 +625,23 @@ const ACCELERATORS = [
       { name:"pulseQE",    description:"Continuous quality insights and reporting.", icon:"bars", url:"#pulseqe", media:null },
       { name:"ModelGuard", description:"Validate and monitor AI/ML models.", icon:"shieldCheck", url:"#modelguard-qe", media:null }
     ]
+  },
+  {
+    id:"customer-experience", category:"Customer Experience", title:"CX Accelerators", shortName:"Customer Exp.",
+    leafLine:"Data-powered design decisions.",
+    description:"Accelerators that turn research, analytics and testing into data-powered design decisions across every customer touchpoint.",
+    color:{ base:"#E8615C", mid:"#F7B3AE", soft:"#FDEDEC", deep:"#BC372F" },
+    icon:"cx", url:"https://digital.compunnel.com/solutions/total-experience", ctaLabel:"Explore all CX Accelerators",
+    subAccelerators:[
+      { name:"InstDiagnose", tm:true, description:"Identify experience gaps, usability issues, and opportunities for improvement.", icon:"diagnose",
+        url:"https://digital.compunnel.com/solutions/total-experience", media:null },
+      { name:"HeatWave", tm:true, description:"Reveal user attention patterns, engagement areas, and potential friction points.", icon:"heat",
+        url:"https://digital.compunnel.com/solutions/total-experience", media:null },
+      { name:"BestFit", tm:true, description:"Validate experience options to discover what performs better with your users.", icon:"split",
+        url:"https://digital.compunnel.com/solutions/total-experience", media:null },
+      { name:"HumanEye", tm:true, description:"Uncover design and usability opportunities through expert human evaluation.", icon:"eye",
+        url:"https://digital.compunnel.com/solutions/total-experience", media:null }
+    ]
   }
 ];
 
@@ -604,6 +681,11 @@ const ICONS = {
   arrow:'<path d="M5 12h14M13 6l6 6-6 6"/>',
   chevron:'<path d="m9 6 6 6-6 6"/>',
   close:'<path d="M6 6l12 12M18 6 6 18"/>',
+  cx:'<path d="M12 13.5a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z"/><path d="M4.5 20.5c1.4-3.1 4.2-5 7.5-5s6.1 1.9 7.5 5"/><path d="M18.5 4.2a5.5 5.5 0 0 1 2.3 2.3M5.5 4.2A5.5 5.5 0 0 0 3.2 6.5"/>',
+  diagnose:'<rect x="5" y="3.5" width="14" height="17" rx="2.5"/><path d="M9 3.5h6M7.8 12.5h2.1l1.4-3 1.8 5.4 1.2-2.4h2"/>',
+  heat:'<path d="M4 19c2.2-2.6 3.6-5.4 4.2-8.4M9.5 19c1.4-1.9 2.4-4 3-6.4M15 19c.8-1.2 1.5-2.6 2-4.1"/><circle cx="16.5" cy="7.5" r="3.6"/><circle cx="16.5" cy="7.5" r="1.2"/>',
+  split:'<rect x="3.5" y="6" width="7.5" height="12" rx="1.8"/><rect x="13" y="6" width="7.5" height="12" rx="1.8"/><path d="M12 3.5v17"/>',
+  eye:'<path d="M2.5 12S6 6.5 12 6.5 21.5 12 21.5 12 18 17.5 12 17.5 2.5 12 2.5 12Z"/><circle cx="12" cy="12" r="2.6"/>',
   expand:'<path d="M14 4h6v6M20 4l-7 7M10 20H4v-6M4 20l7-7"/>',
   image:'<rect x="3.5" y="4.5" width="17" height="15" rx="2"/><circle cx="9" cy="10" r="1.8"/><path d="m20.5 16-5-5-8.5 8.5"/>'
 };
@@ -914,6 +996,7 @@ const KEYWORDS = {
   "applied-ai":["ai","agent","agents","agentic","genai","llm","chatbot","assistant","document","documents","search","discovery","automate workflow","responsible","nlp","ocr","experience","experiences","fx","future"],
   "data-to-insight":["data","analytics","lakehouse","warehouse","mesh","dashboard","dashboards","insight","insights","bi","reporting","real-time","streaming","observability","predictive","metrics"],
   "cloud-platform":["cloud","migration","migrate","aws","azure","gcp","devops","ci","cd","pipeline","pipelines","platform","kubernetes","landing","cost","costs","finops","security","compliance","infrastructure"],
+  "customer-experience":["cx","experience","experiences","customer","ux","ui","usability","design","journey","heatmap","heat","a/b","abtest","testing experience","research","friction","engagement","total experience","fx"],
   "quality-engineering":["test","tests","testing","qa","qe","quality","regression","release","releases","bugs","automation testing","validate","validation"]
 };
 
@@ -991,6 +1074,51 @@ function runSearch(query){
 })();
 
 
+/* ==========================================================
+   DELTAS TABLE — measurable before/after, rendered from data
+   ========================================================== */
+const DELTAS = [
+  { buying:"Lakehouse stood up to first production platform", typical:"12 weeks", ours:"6 weeks",
+    mech:[{ t:"LakehouseIgnite™", id:"data-to-insight" }], detail:"pre-built landing zone, ingestion patterns, governance-as-code" },
+  { buying:"A new governed data product, live", typical:"8 weeks", ours:"4 weeks",
+    mech:[{ t:"MeshForge™", id:"data-to-insight" }], detail:"domain data product templates and lifecycle workflows" },
+  { buying:"Enterprise KPI and analytics enablement", typical:"10 weeks", ours:"5 weeks",
+    mech:[{ t:"MetricStreamAI™", id:"data-to-insight" }], detail:"semantic layer with pre-built KPI contracts" },
+  { buying:"Unreliable pipelines stabilized", typical:"6 weeks", ours:"3 weeks",
+    mech:[{ t:"DataPulse™", id:"data-to-insight" }], detail:"observability, automated DQ checks, alerting playbooks" },
+  { buying:"An answer out of your own document estate", typical:"2 hours", ours:"8 seconds",
+    mech:[{ t:"SearchCore™", id:"applied-ai" }, { t:"DocuIntel™", id:"applied-ai" }], detail:"citation-grounded retrieval over enterprise content" },
+  { buying:"A GenAI pilot reaching live production", typical:"Often never", ours:"6 weeks",
+    mech:[{ t:"InsightForge™", id:"applied-ai" }, { t:"AI-OS™ 4A", id:"applied-ai" }], detail:"a production path designed in from day one" },
+  { buying:"A standard P&C claim, end to end", typical:"14 days", ours:"4 hours",
+    mech:[{ t:"AgentWeave™", id:"applied-ai" }], detail:"five coordinated agents, humans on complex losses only" },
+  { buying:"Physician time lost to documentation", typical:"3.2 hrs/day", ours:"0.7 hrs/day",
+    mech:[{ t:"Clinical copilot", id:"applied-ai" }, { t:"ModelGuard™", id:"applied-ai" }], detail:"ambient scribe, HIPAA-auditable output" },
+  { buying:"Regression cycle time", typical:"Baseline", ours:"5× faster",
+    mech:[{ t:"autom8IQ", id:"quality-engineering" }, { t:"qeForge", id:"quality-engineering" }], detail:"self-healing automation, elastic execution" },
+  { buying:"Defect leakage at release", typical:">10%", ours:"<1%",
+    mech:[{ t:"pulseQE", id:"quality-engineering" }, { t:"qualiCore", id:"quality-engineering" }], detail:"risk-based coverage, predictive defect detection" }
+];
+
+function renderDeltas(){
+  const host = document.getElementById("deltaRows");
+  if (!host) return;
+  const tone = (id) => {
+    const acc = ACCELERATORS.find(a => a.id === id);
+    return acc ? acc.color.deep : "var(--navy)";
+  };
+  host.innerHTML = DELTAS.map(row=>{
+    const mech = row.mech.map(m=>`<b style="color:${tone(m.id)}">${m.t}</b>`).join(" + ");
+    return `
+      <tr>
+        <th scope="row">${row.buying}</th>
+        <td data-label="Typical"><s>${row.typical}</s></td>
+        <td data-label="With Compunnel"><span class="delta-ours">${row.ours}</span></td>
+        <td data-label="The mechanism"><span class="delta-mech">${mech}</span> <span class="delta-detail">— ${row.detail}</span></td>
+      </tr>`;
+  }).join("");
+}
+
 /* Hero video: pause control, reduced motion, save-data */
 (function heroVideo(){
   const v = document.getElementById("heroVideo"), btn = document.getElementById("videoToggle");
@@ -1008,8 +1136,10 @@ function runSearch(query){
 
 /* ==========================================================
    BOT ORB — 60px WebGL sphere pinned bottom-right.
-   Rebuilt from spec: violet→cyan ramp, mid detail tier
+   Rebuilt from spec: mid detail tier
    (rim 0.048, intensity 1.60, eyes 1.08x, seam 0.022),
+   brand ramp #0050EF -> #9326FF -> #E500E5 -> #FF410E,
+   eyes tracking the pointer,
    DPR capped at 2.5, alpha canvas so the CSS shadow follows
    the silhouette. Falls back to a 2D-canvas orb without WebGL.
    ========================================================== */
@@ -1032,9 +1162,20 @@ function runSearch(query){
   const FRAG = `precision highp float;
   varying vec2 uv;
   uniform float t, rim, intensity, eyeScale, seam, blink;
-  const vec3 VIOLET = vec3(.486,.302,1.0);
-  const vec3 CYAN   = vec3(.0,.824,.902);
-  const vec3 DEEP   = vec3(.043,.106,.247);
+  uniform vec2 look;          // -1..1 gaze direction from the pointer
+  // brand ramp: #0050EF -> #9326FF -> #E500E5 -> #FF410E
+  const vec3 G0 = vec3(.000,.314,.937);
+  const vec3 G1 = vec3(.576,.149,1.00);
+  const vec3 G2 = vec3(.898,.000,.898);
+  const vec3 G3 = vec3(1.00,.255,.055);
+  const vec3 DEEP = vec3(.043,.086,.208);
+
+  vec3 ramp(float x){
+    x = clamp(x, 0.0, 1.0) * 3.0;
+    if (x < 1.0) return mix(G0, G1, x);
+    if (x < 2.0) return mix(G1, G2, x - 1.0);
+    return mix(G2, G3, x - 2.0);
+  }
 
   float ell(vec2 p, vec2 c, vec2 r){ vec2 q=(p-c)/r; return length(q)-1.0; }
 
@@ -1046,15 +1187,16 @@ function runSearch(query){
     vec3 L = normalize(vec3(-0.42, 0.58, 0.80));
     float diff = max(dot(n, L), 0.0);
 
-    // violet (bottom) to cyan (top) ramp, brightened by the light
-    vec3 body = mix(VIOLET, CYAN, clamp(uv.y*0.55 + 0.52, 0.0, 1.0));
+    // brand ramp runs diagonally: blue at top-left, orange at bottom-right
+    float g = clamp(0.5 + (uv.x * 0.62 - uv.y * 0.46) * 0.95, 0.0, 1.0);
+    vec3 body = ramp(g);
     body *= 0.42 + 0.72 * diff;
     body += pow(diff, 22.0) * 0.55;                      // specular
 
     // visor
     float v = ell(uv, vec2(0.0, 0.09), vec2(0.60, 0.40));
     float visor = 1.0 - smoothstep(-0.02, 0.02, v);
-    vec3 glass = mix(DEEP, vec3(0.09,0.22,0.46), clamp(uv.y*0.9+0.5,0.0,1.0));
+    vec3 glass = mix(DEEP, mix(vec3(0.07,0.13,0.38), vec3(0.24,0.06,0.26), g), clamp(uv.y*0.9+0.5,0.0,1.0));
     glass += pow(max(dot(n, normalize(vec3(-0.5,0.8,0.7))), 0.0), 8.0) * 0.30;
     vec3 col = mix(body, glass, visor);
 
@@ -1065,16 +1207,17 @@ function runSearch(query){
     // eyes
     float r = 0.085 * eyeScale;
     float lids = mix(1.0, 0.12, blink);
-    float e = min(ell(uv, vec2(-0.215, 0.115), vec2(r, r*lids)),
-                  ell(uv, vec2( 0.215, 0.115), vec2(r, r*lids)));
+    vec2 gaze = look * vec2(0.085, 0.070);
+    float e = min(ell(uv, vec2(-0.215, 0.115) + gaze, vec2(r, r*lids)),
+                  ell(uv, vec2( 0.215, 0.115) + gaze, vec2(r, r*lids)));
     float eye = 1.0 - smoothstep(-0.01, 0.015, e);
     float halo = 1.0 - smoothstep(-0.05, 0.14, e);
-    col += CYAN * halo * 0.35;
-    col = mix(col, vec3(0.78,0.99,1.0), eye);
+    col += ramp(g) * halo * 0.40;
+    col = mix(col, vec3(0.96,0.97,1.0), eye);
 
     // rim light, pulsing very slightly
     float rimMask = smoothstep(1.0 - rim - 0.02, 1.0, d);
-    col += mix(VIOLET, CYAN, 0.5 + 0.5*uv.y) * rimMask * intensity * (0.92 + 0.08*sin(t*1.6));
+    col += ramp(g + 0.10) * rimMask * intensity * (0.92 + 0.08*sin(t*1.6));
 
     float alpha = 1.0 - smoothstep(0.985, 1.0, d);
     gl_FragColor = vec4(col, alpha);
@@ -1108,19 +1251,45 @@ function runSearch(query){
   gl.uniform1f(U("seam"), CFG.seam);
 
   const still = reduceMotion.matches;
+  const uLook = U("look");
   let blinkAt = 2.2, blink = 0, raf = 0, visible = true;
+  let look = { x:0, y:0 }, target = { x:0, y:0 };
 
-  function frame(ms){
+  /* Gaze: the eyes follow the pointer anywhere on the page. The direction is
+     taken from the orb's centre, and the pull maxes out about 280px away. */
+  const REACH = 280;
+  function aimAt(clientX, clientY){
+    const r = canvas.getBoundingClientRect();
+    const dx = clientX - (r.left + r.width/2);
+    const dy = clientY - (r.top + r.height/2);
+    const dist = Math.hypot(dx, dy) || 1;
+    const pull = Math.min(1, dist / REACH);
+    target.x = (dx / dist) * pull;
+    target.y = -(dy / dist) * pull;           // screen y is down, clip y is up
+  }
+  window.addEventListener("pointermove", e=>{
+    if (e.pointerType === "touch") return;
+    aimAt(e.clientX, e.clientY);
+    if (still){ look = { ...target }; draw(performance.now()); }
+  }, { passive:true });
+  window.addEventListener("pointerleave", ()=>{ target.x = target.y = 0; }, { passive:true });
+  window.addEventListener("blur", ()=>{ target.x = target.y = 0; });
+
+  function draw(ms){
     const t = ms / 1000;
     if (!still){
       if (t > blinkAt){ blink = Math.min(1, (t - blinkAt) / 0.07); if (t > blinkAt + 0.14){ blink = 0; blinkAt = t + 3 + Math.random()*3; } }
       else blink = 0;
+      const ease = 0.12;                      // smooth pursuit rather than snapping
+      look.x += (target.x - look.x) * ease;
+      look.y += (target.y - look.y) * ease;
     }
     gl.uniform1f(U("t"), still ? 0 : t);
     gl.uniform1f(U("blink"), blink);
+    gl.uniform2f(uLook, look.x, look.y);
     gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
-    raf = visible && !still ? requestAnimationFrame(frame) : 0;
   }
+  function frame(ms){ draw(ms); raf = visible && !still ? requestAnimationFrame(frame) : 0; }
   frame(0);
   document.addEventListener("visibilitychange", ()=>{
     visible = !document.hidden;
@@ -1131,11 +1300,11 @@ function runSearch(query){
     const c = canvas.getContext("2d");
     if (!c) { host.hidden = true; return; }
     const s = canvas.width, r = s/2;
-    const g = c.createRadialGradient(r*0.62, r*0.55, r*0.15, r, r, r);
-    g.addColorStop(0, "#9E7BFF"); g.addColorStop(.55, "#6E45F0"); g.addColorStop(1, "#00C8E0");
+    const g = c.createLinearGradient(r*0.25, r*0.30, r*1.75, r*1.70);
+    g.addColorStop(0, "#0050EF"); g.addColorStop(.38, "#9326FF"); g.addColorStop(.72, "#E500E5"); g.addColorStop(1, "#FF410E");
     c.beginPath(); c.arc(r, r, r*0.99, 0, 6.2832); c.fillStyle = g; c.fill();
-    c.beginPath(); c.ellipse(r, r*0.92, r*0.60, r*0.40, 0, 0, 6.2832); c.fillStyle = "#0B1B3F"; c.fill();
-    c.fillStyle = "#C7FBFF";
+    c.beginPath(); c.ellipse(r, r*0.92, r*0.60, r*0.40, 0, 0, 6.2832); c.fillStyle = "#0B1635"; c.fill();
+    c.fillStyle = "#F5F7FF";
     [-0.215, 0.215].forEach(x=>{ c.beginPath(); c.ellipse(r + x*r, r*0.885, r*0.085*CFG.eye, r*0.085*CFG.eye, 0, 0, 6.2832); c.fill(); });
   }
 
@@ -1151,6 +1320,7 @@ function runSearch(query){
 /* ---------- init ---------- */
 renderPropeller();
 renderValues();
+renderDeltas();
 bindEvents();
 select(0, { animate:false });
 playIntro();

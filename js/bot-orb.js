@@ -1,7 +1,9 @@
 /* ==========================================================
    BOT ORB — 60px WebGL sphere pinned bottom-right.
-   Rebuilt from spec: violet→cyan ramp, mid detail tier
+   Rebuilt from spec: mid detail tier
    (rim 0.048, intensity 1.60, eyes 1.08x, seam 0.022),
+   brand ramp #0050EF -> #9326FF -> #E500E5 -> #FF410E,
+   eyes tracking the pointer,
    DPR capped at 2.5, alpha canvas so the CSS shadow follows
    the silhouette. Falls back to a 2D-canvas orb without WebGL.
    ========================================================== */
@@ -24,9 +26,20 @@
   const FRAG = `precision highp float;
   varying vec2 uv;
   uniform float t, rim, intensity, eyeScale, seam, blink;
-  const vec3 VIOLET = vec3(.486,.302,1.0);
-  const vec3 CYAN   = vec3(.0,.824,.902);
-  const vec3 DEEP   = vec3(.043,.106,.247);
+  uniform vec2 look;          // -1..1 gaze direction from the pointer
+  // brand ramp: #0050EF -> #9326FF -> #E500E5 -> #FF410E
+  const vec3 G0 = vec3(.000,.314,.937);
+  const vec3 G1 = vec3(.576,.149,1.00);
+  const vec3 G2 = vec3(.898,.000,.898);
+  const vec3 G3 = vec3(1.00,.255,.055);
+  const vec3 DEEP = vec3(.043,.086,.208);
+
+  vec3 ramp(float x){
+    x = clamp(x, 0.0, 1.0) * 3.0;
+    if (x < 1.0) return mix(G0, G1, x);
+    if (x < 2.0) return mix(G1, G2, x - 1.0);
+    return mix(G2, G3, x - 2.0);
+  }
 
   float ell(vec2 p, vec2 c, vec2 r){ vec2 q=(p-c)/r; return length(q)-1.0; }
 
@@ -38,15 +51,16 @@
     vec3 L = normalize(vec3(-0.42, 0.58, 0.80));
     float diff = max(dot(n, L), 0.0);
 
-    // violet (bottom) to cyan (top) ramp, brightened by the light
-    vec3 body = mix(VIOLET, CYAN, clamp(uv.y*0.55 + 0.52, 0.0, 1.0));
+    // brand ramp runs diagonally: blue at top-left, orange at bottom-right
+    float g = clamp(0.5 + (uv.x * 0.62 - uv.y * 0.46) * 0.95, 0.0, 1.0);
+    vec3 body = ramp(g);
     body *= 0.42 + 0.72 * diff;
     body += pow(diff, 22.0) * 0.55;                      // specular
 
     // visor
     float v = ell(uv, vec2(0.0, 0.09), vec2(0.60, 0.40));
     float visor = 1.0 - smoothstep(-0.02, 0.02, v);
-    vec3 glass = mix(DEEP, vec3(0.09,0.22,0.46), clamp(uv.y*0.9+0.5,0.0,1.0));
+    vec3 glass = mix(DEEP, mix(vec3(0.07,0.13,0.38), vec3(0.24,0.06,0.26), g), clamp(uv.y*0.9+0.5,0.0,1.0));
     glass += pow(max(dot(n, normalize(vec3(-0.5,0.8,0.7))), 0.0), 8.0) * 0.30;
     vec3 col = mix(body, glass, visor);
 
@@ -57,16 +71,17 @@
     // eyes
     float r = 0.085 * eyeScale;
     float lids = mix(1.0, 0.12, blink);
-    float e = min(ell(uv, vec2(-0.215, 0.115), vec2(r, r*lids)),
-                  ell(uv, vec2( 0.215, 0.115), vec2(r, r*lids)));
+    vec2 gaze = look * vec2(0.085, 0.070);
+    float e = min(ell(uv, vec2(-0.215, 0.115) + gaze, vec2(r, r*lids)),
+                  ell(uv, vec2( 0.215, 0.115) + gaze, vec2(r, r*lids)));
     float eye = 1.0 - smoothstep(-0.01, 0.015, e);
     float halo = 1.0 - smoothstep(-0.05, 0.14, e);
-    col += CYAN * halo * 0.35;
-    col = mix(col, vec3(0.78,0.99,1.0), eye);
+    col += ramp(g) * halo * 0.40;
+    col = mix(col, vec3(0.96,0.97,1.0), eye);
 
     // rim light, pulsing very slightly
     float rimMask = smoothstep(1.0 - rim - 0.02, 1.0, d);
-    col += mix(VIOLET, CYAN, 0.5 + 0.5*uv.y) * rimMask * intensity * (0.92 + 0.08*sin(t*1.6));
+    col += ramp(g + 0.10) * rimMask * intensity * (0.92 + 0.08*sin(t*1.6));
 
     float alpha = 1.0 - smoothstep(0.985, 1.0, d);
     gl_FragColor = vec4(col, alpha);
@@ -100,19 +115,45 @@
   gl.uniform1f(U("seam"), CFG.seam);
 
   const still = reduceMotion.matches;
+  const uLook = U("look");
   let blinkAt = 2.2, blink = 0, raf = 0, visible = true;
+  let look = { x:0, y:0 }, target = { x:0, y:0 };
 
-  function frame(ms){
+  /* Gaze: the eyes follow the pointer anywhere on the page. The direction is
+     taken from the orb's centre, and the pull maxes out about 280px away. */
+  const REACH = 280;
+  function aimAt(clientX, clientY){
+    const r = canvas.getBoundingClientRect();
+    const dx = clientX - (r.left + r.width/2);
+    const dy = clientY - (r.top + r.height/2);
+    const dist = Math.hypot(dx, dy) || 1;
+    const pull = Math.min(1, dist / REACH);
+    target.x = (dx / dist) * pull;
+    target.y = -(dy / dist) * pull;           // screen y is down, clip y is up
+  }
+  window.addEventListener("pointermove", e=>{
+    if (e.pointerType === "touch") return;
+    aimAt(e.clientX, e.clientY);
+    if (still){ look = { ...target }; draw(performance.now()); }
+  }, { passive:true });
+  window.addEventListener("pointerleave", ()=>{ target.x = target.y = 0; }, { passive:true });
+  window.addEventListener("blur", ()=>{ target.x = target.y = 0; });
+
+  function draw(ms){
     const t = ms / 1000;
     if (!still){
       if (t > blinkAt){ blink = Math.min(1, (t - blinkAt) / 0.07); if (t > blinkAt + 0.14){ blink = 0; blinkAt = t + 3 + Math.random()*3; } }
       else blink = 0;
+      const ease = 0.12;                      // smooth pursuit rather than snapping
+      look.x += (target.x - look.x) * ease;
+      look.y += (target.y - look.y) * ease;
     }
     gl.uniform1f(U("t"), still ? 0 : t);
     gl.uniform1f(U("blink"), blink);
+    gl.uniform2f(uLook, look.x, look.y);
     gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
-    raf = visible && !still ? requestAnimationFrame(frame) : 0;
   }
+  function frame(ms){ draw(ms); raf = visible && !still ? requestAnimationFrame(frame) : 0; }
   frame(0);
   document.addEventListener("visibilitychange", ()=>{
     visible = !document.hidden;
@@ -123,11 +164,11 @@
     const c = canvas.getContext("2d");
     if (!c) { host.hidden = true; return; }
     const s = canvas.width, r = s/2;
-    const g = c.createRadialGradient(r*0.62, r*0.55, r*0.15, r, r, r);
-    g.addColorStop(0, "#9E7BFF"); g.addColorStop(.55, "#6E45F0"); g.addColorStop(1, "#00C8E0");
+    const g = c.createLinearGradient(r*0.25, r*0.30, r*1.75, r*1.70);
+    g.addColorStop(0, "#0050EF"); g.addColorStop(.38, "#9326FF"); g.addColorStop(.72, "#E500E5"); g.addColorStop(1, "#FF410E");
     c.beginPath(); c.arc(r, r, r*0.99, 0, 6.2832); c.fillStyle = g; c.fill();
-    c.beginPath(); c.ellipse(r, r*0.92, r*0.60, r*0.40, 0, 0, 6.2832); c.fillStyle = "#0B1B3F"; c.fill();
-    c.fillStyle = "#C7FBFF";
+    c.beginPath(); c.ellipse(r, r*0.92, r*0.60, r*0.40, 0, 0, 6.2832); c.fillStyle = "#0B1635"; c.fill();
+    c.fillStyle = "#F5F7FF";
     [-0.215, 0.215].forEach(x=>{ c.beginPath(); c.ellipse(r + x*r, r*0.885, r*0.085*CFG.eye, r*0.085*CFG.eye, 0, 0, 6.2832); c.fill(); });
   }
 

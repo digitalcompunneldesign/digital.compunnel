@@ -18,6 +18,7 @@ js/animation.js         clockwise rotation, panel transition, accent colour
 js/interaction.js       leaf selection, keyboard nav, detail dialog
 js/intro.js             first-view clockwise spin
 js/site-search.js       search matching, chips, voice input, mobile menu
+js/deltas.js            "Not adjectives. Deltas." comparison table rows
 js/hero-video.js        hero video pause/play, reduced motion, save-data
 js/bot-orb.js           60px WebGL bot orb pinned bottom-right
 media/hero.mp4          hero background video (1080p, muted, 5.9 MB)
@@ -39,15 +40,20 @@ Each sub-accelerator in the right panel is an accordion item, and only one is op
   ```js
   media:{ src:"media/accelerators/cloudforge.gif", alt:"CloudForge diagram: ..." }
   ```
-- Items with `media:null` (Data-to-Insight, Cloud & Platform, Quality Engineering) already open as accordions and show a "Diagram coming soon" placeholder until an image is added.
+- Items with `media:null` (Data-to-Insight, Cloud & Platform, Quality Engineering, Customer Experience) already open as accordions and show a "Diagram coming soon" placeholder until an image is added.
 - `tm:true` adds ™ after the name. A search for a sub-accelerator name opens its item automatically.
 
 ## Bot orb
-`js/bot-orb.js` draws a 60px orb fixed to the bottom-right corner: a violet-to-cyan sphere with a visor, two eyes, a seam shadow and a rim light, rendered by a fragment shader on an alpha canvas (no libraries).
+`js/bot-orb.js` draws a 60px orb fixed to the bottom-right corner: a sphere carrying the brand ramp #0050EF → #9326FF → #E500E5 → #FF410E (blue at top-left, orange at bottom-right) with a visor, two eyes, a seam shadow and a rim light, rendered by a fragment shader on an alpha canvas (no libraries).
+- Ramp stops are the `G0`–`G3` constants in the shader.
 - `SIZE` at the top of the file is the only number to change. Detail tiers switch at 40px and 80px; 60px uses the middle tier (rim 0.048, intensity 1.60, eyes 1.08x, seam 0.022, pixel ratio capped at 2.5).
-- The CSS drop-shadow `0 4px 9px rgba(58,78,130,.22)` is in `.bot-btn canvas` in `css/site.css`. Remove that line if the page has its own elevation treatment.
+- The CSS drop-shadow `0 4px 9px rgba(96,40,170,.26)` is in `.bot-btn canvas` in `css/site.css`. Remove that line if the page has its own elevation treatment.
+- The eyes follow the mouse anywhere on the page: the pull is strongest within about 280px (`REACH`) and they return to centre when the pointer leaves the window. Touch input is ignored. With reduced motion they jump straight to the pointer instead of easing.
 - It blinks and floats gently, holds still for `prefers-reduced-motion`, pauses in background tabs, and falls back to a 2D-canvas orb without WebGL.
 - Clicking it scrolls to the hero search and focuses the field. Change that handler at the end of the file to open a chat widget instead.
+
+## Deltas table
+`js/deltas.js` holds the `DELTAS` rows (what you are buying, typical, with Compunnel, mechanism and detail). Each mechanism entry carries an accelerator `id`, so its name picks up that domain's colour automatically; use an id from `ACCELERATORS` in `js/data.js`. Below 820px the table turns into stacked cards with the column names as labels.
 
 ## Not wired yet
 The header dropdowns, region picker and theme button are visual only. Their links point to `#`.

@@ -27,6 +27,11 @@ const ICONS = {
   arrow:'<path d="M5 12h14M13 6l6 6-6 6"/>',
   chevron:'<path d="m9 6 6 6-6 6"/>',
   close:'<path d="M6 6l12 12M18 6 6 18"/>',
+  cx:'<path d="M12 13.5a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z"/><path d="M4.5 20.5c1.4-3.1 4.2-5 7.5-5s6.1 1.9 7.5 5"/><path d="M18.5 4.2a5.5 5.5 0 0 1 2.3 2.3M5.5 4.2A5.5 5.5 0 0 0 3.2 6.5"/>',
+  diagnose:'<rect x="5" y="3.5" width="14" height="17" rx="2.5"/><path d="M9 3.5h6M7.8 12.5h2.1l1.4-3 1.8 5.4 1.2-2.4h2"/>',
+  heat:'<path d="M4 19c2.2-2.6 3.6-5.4 4.2-8.4M9.5 19c1.4-1.9 2.4-4 3-6.4M15 19c.8-1.2 1.5-2.6 2-4.1"/><circle cx="16.5" cy="7.5" r="3.6"/><circle cx="16.5" cy="7.5" r="1.2"/>',
+  split:'<rect x="3.5" y="6" width="7.5" height="12" rx="1.8"/><rect x="13" y="6" width="7.5" height="12" rx="1.8"/><path d="M12 3.5v17"/>',
+  eye:'<path d="M2.5 12S6 6.5 12 6.5 21.5 12 21.5 12 18 17.5 12 17.5 2.5 12 2.5 12Z"/><circle cx="12" cy="12" r="2.6"/>',
   expand:'<path d="M14 4h6v6M20 4l-7 7M10 20H4v-6M4 20l7-7"/>',
   image:'<rect x="3.5" y="4.5" width="17" height="15" rx="2"/><circle cx="9" cy="10" r="1.8"/><path d="m20.5 16-5-5-8.5 8.5"/>'
 };

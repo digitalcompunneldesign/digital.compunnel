@@ -65,6 +65,23 @@ const ACCELERATORS = [
       { name:"pulseQE",    description:"Continuous quality insights and reporting.", icon:"bars", url:"#pulseqe", media:null },
       { name:"ModelGuard", description:"Validate and monitor AI/ML models.", icon:"shieldCheck", url:"#modelguard-qe", media:null }
     ]
+  },
+  {
+    id:"customer-experience", category:"Customer Experience", title:"CX Accelerators", shortName:"Customer Exp.",
+    leafLine:"Data-powered design decisions.",
+    description:"Accelerators that turn research, analytics and testing into data-powered design decisions across every customer touchpoint.",
+    color:{ base:"#E8615C", mid:"#F7B3AE", soft:"#FDEDEC", deep:"#BC372F" },
+    icon:"cx", url:"https://digital.compunnel.com/solutions/total-experience", ctaLabel:"Explore all CX Accelerators",
+    subAccelerators:[
+      { name:"InstDiagnose", tm:true, description:"Identify experience gaps, usability issues, and opportunities for improvement.", icon:"diagnose",
+        url:"https://digital.compunnel.com/solutions/total-experience", media:null },
+      { name:"HeatWave", tm:true, description:"Reveal user attention patterns, engagement areas, and potential friction points.", icon:"heat",
+        url:"https://digital.compunnel.com/solutions/total-experience", media:null },
+      { name:"BestFit", tm:true, description:"Validate experience options to discover what performs better with your users.", icon:"split",
+        url:"https://digital.compunnel.com/solutions/total-experience", media:null },
+      { name:"HumanEye", tm:true, description:"Uncover design and usability opportunities through expert human evaluation.", icon:"eye",
+        url:"https://digital.compunnel.com/solutions/total-experience", media:null }
+    ]
   }
 ];
 

@@ -5,6 +5,7 @@ const KEYWORDS = {
   "applied-ai":["ai","agent","agents","agentic","genai","llm","chatbot","assistant","document","documents","search","discovery","automate workflow","responsible","nlp","ocr","experience","experiences","fx","future"],
   "data-to-insight":["data","analytics","lakehouse","warehouse","mesh","dashboard","dashboards","insight","insights","bi","reporting","real-time","streaming","observability","predictive","metrics"],
   "cloud-platform":["cloud","migration","migrate","aws","azure","gcp","devops","ci","cd","pipeline","pipelines","platform","kubernetes","landing","cost","costs","finops","security","compliance","infrastructure"],
+  "customer-experience":["cx","experience","experiences","customer","ux","ui","usability","design","journey","heatmap","heat","a/b","abtest","testing experience","research","friction","engagement","total experience","fx"],
   "quality-engineering":["test","tests","testing","qa","qe","quality","regression","release","releases","bugs","automation testing","validate","validation"]
 };
 

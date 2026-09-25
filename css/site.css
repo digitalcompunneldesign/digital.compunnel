@@ -131,7 +131,7 @@ a{color:inherit}
 .bot-orb:hover .bot-tip,.bot-orb:focus-within .bot-tip{opacity:1;transform:none}
 .bot-btn{display:block;width:60px;height:60px;border-radius:50%;padding:0;line-height:0;-webkit-tap-highlight-color:transparent}
 .bot-btn canvas{width:60px;height:60px;display:block;border-radius:50%;
-  filter:drop-shadow(0 4px 9px rgba(58,78,130,.22));
+  filter:drop-shadow(0 4px 9px rgba(96,40,170,.26));
   animation:botFloat 5.5s ease-in-out infinite;transition:transform .3s}
 .bot-btn:hover canvas{transform:scale(1.06)}
 .bot-btn:focus-visible{outline:2px solid #7C4DFF;outline-offset:4px;border-radius:50%}
