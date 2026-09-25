@@ -33,10 +33,14 @@ const ACCELERATORS = [
     color:{ base:"#2F7BF6", mid:"#98C0FF", soft:"#EAF2FF", deep:"#1D5CCF" },
     icon:"database", url:"https://digital.compunnel.com/accelerators/data-platform-accelerators", ctaLabel:"Explore all Data Accelerators",
     subAccelerators:[
-      { name:"LakehouseIgnite", description:"Accelerate modern data platform setup.", icon:"layers", url:"#lakehouseignite", media:null },
-      { name:"MeshForge",       description:"Enable distributed data mesh architectures.", icon:"mesh", url:"#meshforge", media:null },
-      { name:"MetricStreamAI",  description:"Real-time analytics and predictive insights.", icon:"stream", url:"#metricstreamai", media:null },
-      { name:"DataPulse",       description:"Data observability and quality at scale.", icon:"pulse", url:"#datapulse", media:null }
+      { name:"LakehouseIgnite", description:"Accelerate modern data platform setup.", icon:"layers", url:"#lakehouseignite",
+        media:{ src:"media/accelerators/lakehouseignite.gif", alt:"LakehouseIgnite diagram: raw data lands in bronze, silver and gold layers with governance-as-code and reusable CI/CD, producing trusted insight at scale." } },
+      { name:"MeshForge",       description:"Enable distributed data mesh architectures.", icon:"mesh", url:"#meshforge",
+        media:{ src:"media/accelerators/meshforge.gif", alt:"MeshForge diagram: siloed sources become data products that are created, certified and published into a governed data marketplace." } },
+      { name:"MetricStreamAI",  description:"Real-time analytics and predictive insights.", icon:"stream", url:"#metricstreamai",
+        media:{ src:"media/accelerators/metricstreamai.gif", alt:"MetricStreamAI diagram: dashboards, reports and analytics feed a semantic layer that standardizes, connects and governs metrics into one source of truth." } },
+      { name:"DataPulse",       description:"Data observability and quality at scale.", icon:"pulse", url:"#datapulse",
+        media:{ src:"media/accelerators/datapulse.gif", alt:"DataPulse diagram: pipelines run through quality checks, anomaly detection, SLA tracking and centralized visibility into proactive alert playbooks." } }
     ]
   },
   {
@@ -46,11 +50,16 @@ const ACCELERATORS = [
     color:{ base:"#16A36A", mid:"#8ADBB5", soft:"#E6F8EF", deep:"#0C7D50" },
     icon:"cloud", url:"https://digital.compunnel.com/accelerators/cloud-native-accelerators", ctaLabel:"Explore all Cloud Accelerators",
     subAccelerators:[
-      { name:"CloudForge",    description:"Accelerate cloud landing zones and migration.", icon:"cloudUp", url:"#cloudforge", media:null },
-      { name:"PlatformX",     description:"Pre-built platform engineering toolkit.", icon:"platform", url:"#platformx", media:null },
-      { name:"ShieldCI",      description:"Secure CI/CD pipelines by design.", icon:"branch", url:"#shieldci", media:null },
-      { name:"SecureLanding", description:"Compliance-ready cloud environments.", icon:"lock", url:"#securelanding", media:null },
-      { name:"FinOpsVision",  description:"Optimize cloud costs with intelligence.", icon:"coin", url:"#finopsvision", media:null }
+      { name:"CloudForge",    description:"Accelerate cloud landing zones and migration.", icon:"cloudUp", url:"#cloudforge",
+        media:{ src:"media/accelerators/cloudforge.gif", alt:"CloudForge diagram: applications are assessed, planned in waves, migrated by pattern and validated into a governed, cutover-tested cloud." } },
+      { name:"PlatformX",     description:"Pre-built platform engineering toolkit.", icon:"platform", url:"#platformx",
+        media:{ src:"media/accelerators/platformx.gif", alt:"PlatformX diagram: a legacy monolith passes through a reusable pattern hub of microservices, containers, event-driven and orchestration patterns into an elastic cloud-native platform." } },
+      { name:"ShieldCI",      description:"Secure CI/CD pipelines by design.", icon:"branch", url:"#shieldci",
+        media:{ src:"media/accelerators/shieldci.gif", alt:"ShieldCI diagram: every code push runs static analysis, dynamic testing, container scanning, compliance validation and secrets management before a secure release." } },
+      { name:"SecureLanding", description:"Compliance-ready cloud environments.", icon:"lock", url:"#securelanding",
+        media:{ src:"media/accelerators/securelanding.gif", alt:"SecureLanding diagram: cloud workloads pass through multi-account architecture, network topology, IAM controls, compliance and infrastructure as code into a governed, production-ready cloud." } },
+      { name:"FinOpsVision",  description:"Optimize cloud costs with intelligence.", icon:"coin", url:"#finopsvision",
+        media:{ src:"media/accelerators/finopsvision.gif", alt:"FinOpsVision diagram: cloud spend runs through cost visibility, tagging enforcement, rightsizing, waste identification and FinOps governance into lower waste and smarter allocation." } }
     ]
   },
   {
@@ -60,10 +69,14 @@ const ACCELERATORS = [
     color:{ base:"#F0891E", mid:"#FFC48A", soft:"#FFF2E4", deep:"#C2610A" },
     icon:"shieldCheck", url:"https://digital.compunnel.com/accelerators/quality-engineering-accelerators", ctaLabel:"Explore all Quality Accelerators",
     subAccelerators:[
-      { name:"qualiCore",  description:"AI-driven test automation framework.", icon:"qcore", url:"#qualicore", media:null },
-      { name:"qeForge",    description:"Accelerate QE setup and test lifecycle.", icon:"sliders", url:"#qeforge", media:null },
-      { name:"pulseQE",    description:"Continuous quality insights and reporting.", icon:"bars", url:"#pulseqe", media:null },
-      { name:"ModelGuard", description:"Validate and monitor AI/ML models.", icon:"shieldCheck", url:"#modelguard-qe", media:null }
+      { name:"qualiCore",  description:"AI-driven test automation framework.", icon:"qcore", url:"#qualicore",
+        media:{ src:"media/accelerators/qualicore.gif", alt:"qualiCore diagram: requirements and risk signals drive test scenarios, coverage expansion, risk-based prioritization and gap detection for production-ready coverage." } },
+      { name:"qeForge",    description:"Accelerate QE setup and test lifecycle.", icon:"sliders", url:"#qeforge",
+        media:{ src:"media/accelerators/qeforge.gif", alt:"qeForge diagram: test demand flows through environment provisioning, parallel execution, capacity scaling and CI/CD integration for faster automated testing." } },
+      { name:"pulseQE",    description:"Continuous quality insights and reporting.", icon:"bars", url:"#pulseqe",
+        media:{ src:"media/accelerators/pulseqe.gif", alt:"pulseQE diagram: quality signals feed metrics, release readiness, defect prediction, trend monitoring and risk signals into earlier release confidence." } },
+      { name:"ModelGuard", description:"Validate and monitor AI/ML models.", icon:"shieldCheck", url:"#modelguard-qe",
+        media:{ src:"media/accelerators/modelguard-qe.gif", alt:"ModelGuard diagram: AI models, agents and test outputs run through model monitoring, audit trails, policy validation and bias monitoring into trusted AI quality." } }
     ]
   },
   {
