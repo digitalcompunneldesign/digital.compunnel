@@ -21,9 +21,9 @@ js/site-search.js       search matching, chips, voice input, mobile menu
 js/deltas.js            "Not adjectives. Deltas." comparison table rows
 js/hero-video.js        hero video pause/play, reduced motion, save-data
 js/bot-orb.js           60px WebGL bot orb pinned bottom-right
-media/hero.mp4          hero background video (1080p, muted, 5.9 MB)
+media/hero.mp4          hero background video (1080p, muted, 3.3 MB)
 media/hero-poster.jpg   first frame shown before the video loads
-media/accelerators/     sub-accelerator diagrams (717x525 GIFs, 18 of them)
+media/accelerators/     sub-accelerator diagrams (717x525 GIFs, 22 of them)
 js/main.js              init
 ```
 
@@ -40,7 +40,7 @@ Each sub-accelerator in the right panel is an accordion item, and only one is op
   ```js
   media:{ src:"media/accelerators/cloudforge.gif", alt:"CloudForge diagram: ..." }
   ```
-- Items with `media:null` (the four Customer Experience accelerators) already open as accordions and show a "Diagram coming soon" placeholder until an image is added.
+- Every accelerator now has a diagram. Any item left with `media:null` still opens as an accordion and shows a "Diagram coming soon" placeholder.
 - `tm:true` adds ™ after the name. A search for a sub-accelerator name opens its item automatically.
 
 ## Bot orb
@@ -59,7 +59,7 @@ Each sub-accelerator in the right panel is an accordion item, and only one is op
 The header dropdowns, region picker and theme button are visual only. Their links point to `#`.
 
 ## Hero video and fonts
-Montserrat is loaded from Google Fonts. The hero background is `media/hero.mp4`: a muted, looping 1080p version of the supplied clip with the audio removed.
+Montserrat is loaded from Google Fonts. The hero background is `media/hero.mp4`: a muted, looping 1080p version of the supplied light-streams clip with the audio removed.
 - A pause/play button sits at the bottom-right of the hero.
 - The video starts paused for visitors with reduced motion or data saver on, and it pauses while the tab is hidden.
 - `standalone.html` embeds a lighter 720p copy so the page works as a single file. Its diagrams are compressed copies (600px wide) for the same reason; `index.html` uses the full-size originals in `media/accelerators/`.

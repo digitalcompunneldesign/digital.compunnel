@@ -44,7 +44,8 @@ const ACCELERATORS = [
     ]
   },
   {
-    id:"cloud-platform", category:"Cloud & Platform Engineering", title:"Cloud Accelerators", shortName:"Cloud & Platform",
+    id:"cloud-platform", category:"Cloud & Platform Engineering", title:"Cloud Accelerators",
+    leafName:"Cloud & Platform", shortName:"Cloud & Platform",
     leafLine:"Secure, scalable platforms, faster.",
     description:"Accelerators to build secure, scalable and high-performing cloud-native platforms, faster.",
     color:{ base:"#16A36A", mid:"#8ADBB5", soft:"#E6F8EF", deep:"#0C7D50" },
@@ -86,14 +87,18 @@ const ACCELERATORS = [
     color:{ base:"#E8615C", mid:"#F7B3AE", soft:"#FDEDEC", deep:"#BC372F" },
     icon:"cx", url:"https://digital.compunnel.com/solutions/total-experience", ctaLabel:"Explore all CX Accelerators",
     subAccelerators:[
-      { name:"InstDiagnose", tm:true, description:"Identify experience gaps, usability issues, and opportunities for improvement.", icon:"diagnose",
-        url:"https://digital.compunnel.com/solutions/total-experience", media:null },
-      { name:"HeatWave", tm:true, description:"Reveal user attention patterns, engagement areas, and potential friction points.", icon:"heat",
-        url:"https://digital.compunnel.com/solutions/total-experience", media:null },
+      { name:"InsightForge", tm:true, description:"Identify experience gaps, usability issues, and opportunities for improvement.", icon:"diagnose",
+        url:"https://digital.compunnel.com/solutions/total-experience",
+        media:{ src:"media/accelerators/instdiagnose.gif", alt:"InsightForge animation: a live UX diagnostic run moving through inspect, identify and diagnose while findings are counted." } },
+      { name:"HotGaze", tm:true, description:"Reveal user attention patterns, engagement areas, and potential friction points.", icon:"heat",
+        url:"https://digital.compunnel.com/solutions/total-experience",
+        media:{ src:"media/accelerators/hotgaze.gif", alt:"HotGaze animation: a live behaviour signal over an interface moving through observe, focus and reveal as attention areas light up." } },
       { name:"BestFit", tm:true, description:"Validate experience options to discover what performs better with your users.", icon:"split",
-        url:"https://digital.compunnel.com/solutions/total-experience", media:null },
+        url:"https://digital.compunnel.com/solutions/total-experience",
+        media:{ src:"media/accelerators/bestfit.gif", alt:"BestFit animation: two design options compared live through explore, evaluate and select, with visitor counts per option." } },
       { name:"HumanEye", tm:true, description:"Uncover design and usability opportunities through expert human evaluation.", icon:"eye",
-        url:"https://digital.compunnel.com/solutions/total-experience", media:null }
+        url:"https://digital.compunnel.com/solutions/total-experience",
+        media:{ src:"media/accelerators/humaneye.gif", alt:"HumanEye animation: an expert review of a page moving through explore, perceive and refine while areas are counted." } }
     ]
   }
 ];
